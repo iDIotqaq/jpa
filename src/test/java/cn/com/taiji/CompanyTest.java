@@ -4,10 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +55,15 @@ public class CompanyTest {
         entityManager.remove(company);
         transaction.commit();
     }
-
+    @Test
+    public void findCompany(){
+        transaction.begin();
+        Query query = entityManager.createQuery("select c from Company as c where id=:id ");
+        query.setParameter("id",1);
+        Company company =  (Company) query.getSingleResult();
+        entityManager.remove(company);
+        transaction.commit();
+    }
     @After
     public void closeEntity(){
 
