@@ -67,16 +67,14 @@
 
 + createNativeQuery 用于执行sql语句
 
-  
-
-###接收方法
+### 接收方法
 
 + List getResultList()   用于执行select语句并返回结果集实体列表。
 
 + Object getSingleResult()  用于执行只返回单个结果实体的select语句
-###两种语句
-
+### 两种语句
 + select o from Orders o where o.id = :myId   setParameter中第一个参数为：后的名字
+
 + select o from Order o where o.id = ?1   setParameter中第一个参数为？后的索引值
 
 
