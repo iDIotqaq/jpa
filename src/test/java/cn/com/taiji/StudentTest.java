@@ -62,13 +62,10 @@ public class StudentTest {
     @Test
     public void delete(){
         transaction.begin();
-        Query query = entityManager.createQuery("SELECT s from Student as s where s.id=:id");
+        Query query = entityManager.createQuery("SELECT s from Student as s where s.id=:id",Student.class);
         query.setParameter("id",1);
-        List<Student> studentList= query.getResultList();
-        for (Student student:studentList
-             ) {
-            entityManager.remove(student);
-        }
+        Student student= (Student) query.getSingleResult();
+        entityManager.remove(student);
         transaction.commit();
     }
 
