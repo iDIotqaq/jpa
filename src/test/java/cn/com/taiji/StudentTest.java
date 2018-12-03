@@ -49,12 +49,12 @@ public class StudentTest {
     @Test
     public void insertStudent(){
         transaction.begin();
-        Query query = entityManager.createQuery("SELECT c from Course as c where c.id>:id");
-        query.setParameter("id",0);
+        Query query = entityManager.createQuery("SELECT c from Course as c");
         List<Course> courseList = query.getResultList();
+        System.out.println(courseList);
         Student student = new Student();
-        student.setName("yangye");
-        student.setSex("1");
+        student.setName("zhangsan");
+        student.setSex("0");
         student.setCourseList(courseList);
         entityManager.persist(student);
         transaction.commit();
