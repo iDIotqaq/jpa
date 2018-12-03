@@ -56,3 +56,36 @@
       //关联到主表的外键名：主表名+下划线+主表中的主键列名,即user_id
       //关联到从表的外键名：主表中用于关联的属性名+下划线+从表的主键列名,即authority_id
       //主表就是关系维护端对应的表，从表就是关系被维护端对应的表
+ 
+## JPQL
+
+### 三种方法
+
++ createQuery 用于执行jpql语句
+
++ create NamedQuery  用于执行实体类前@NamedQuery标记的语句
+
++ createNativeQuery 用于执行sql语句
+
+  
+
+###接收方法
+
++ List getResultList()   用于执行select语句并返回结果集实体列表。
+
++ Object getSingleResult()  用于执行只返回单个结果实体的select语句
+###两种语句
+
++ select o from Orders o where o.id = :myId   setParameter中第一个参数为：后的名字
++ select o from Order o where o.id = ?1   setParameter中第一个参数为？后的索引值
+
+
+### 设置参数
+
++ setParameter() 不同场景的参数内容不同
+
+  
+
+### 查询所有的语句
+
+select o from Order o 
