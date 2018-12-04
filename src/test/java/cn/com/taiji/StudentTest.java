@@ -64,6 +64,16 @@ public class StudentTest {
         transaction.commit();
     }
     @Test
+    public void update(){
+        transaction.begin();
+        Query query = entityManager.createQuery("update from Student set sex=:sex where id=:id");
+        query.setParameter("sex","1");
+        query.setParameter("id",5);
+        query.executeUpdate();
+        transaction.commit();
+    }
+    //更新
+    @Test
     public void delete(){
         transaction.begin();
         Query query = entityManager.createQuery("SELECT s from Student as s where s.id=:id",Student.class);
