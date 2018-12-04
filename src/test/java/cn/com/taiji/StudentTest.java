@@ -5,6 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +44,7 @@ public class StudentTest {
         courseList.add(course1);
         courseList.add(course2);
         Student student = new Student();
-        student.setName("yangye");
+        student.setName("yy");
         student.setSex("1");
         student.setCourseList(courseList);
         entityManager.persist(student);
@@ -53,7 +57,7 @@ public class StudentTest {
         List<Course> courseList = query.getResultList();
         System.out.println(courseList);
         Student student = new Student();
-        student.setName("zhangsan");
+        student.setName("yy");
         student.setSex("0");
         student.setCourseList(courseList);
         entityManager.persist(student);
@@ -68,7 +72,18 @@ public class StudentTest {
         entityManager.remove(student);
         transaction.commit();
     }
-
+    //试验criteria API
+    @Test
+    public void criteriaFind(){
+        transaction.begin();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Student> criteriaQuery = criteriaBuilder.createQuery(Student.class);
+        Root<Student> studentRoot = criteriaQuery.from(Student.class);
+        criteriaQuery.select(studentRoot).where(criteriaBuilder.equal(studentRoot.get("sex"),"0"));
+        List<Student> studentList = entityManager.createQuery(criteriaQuery).getResultList();
+        System.out.println(studentList);
+        transaction.commit();
+    }
     @After
     public void closeEntity(){
 
